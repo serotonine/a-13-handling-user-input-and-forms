@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { of } from 'rxjs';
+import { debounceTime, of } from 'rxjs';
 
 // Custom validator.
 function hasNumber(control: AbstractControl) {
@@ -21,6 +21,13 @@ function isUniqueEmail(control: AbstractControl) {
   }
   return of({ dupplicateEmail: true });
 }
+// Another way to handle.
+const savedForm = localStorage.getItem('email');
+let initEmail = '';
+if (savedForm) {
+  const saved = JSON.parse(savedForm);
+  initEmail = saved.email;
+}
 
 @Component({
   selector: 'app-login',
@@ -30,8 +37,9 @@ function isUniqueEmail(control: AbstractControl) {
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  destroyRef = inject(DestroyRef);
   form = new FormGroup({
-    email: new FormControl('', {
+    email: new FormControl(initEmail, {
       validators: [Validators.required, Validators.email],
       asyncValidators: [isUniqueEmail],
     }),
@@ -52,6 +60,26 @@ export class LoginComponent {
       this.form.controls.password.dirty &&
       this.form.controls.password.invalid
     );
+  }
+  ngOnInit() {
+    // IN THIS CASE COULD BE INIT IN THE FORM ITSELF
+    // SEE ABOVE
+    /* const savedForm = localStorage.getItem('email');
+    if(savedForm){
+      const saved = JSON.parse(savedForm);
+      // this.form.controls.email.setValue(saved.email); 
+      // Alternative.
+      this.form.patchValue({email:saved.email })}*/
+
+    const subscription = this.form.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe({
+        next: (value) => {
+          localStorage.setItem('email', JSON.stringify({ email: value.email }));
+        },
+      });
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
   onSubmit() {
     Object.entries(this.form.controls).map((item) =>

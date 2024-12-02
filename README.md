@@ -23,3 +23,4 @@ Build [Maximilian Schwarzmüller](https://www.udemy.com/user/maximilian-schwarzm
   - [ReactiveFormsModule](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129762)
   - [Building Custom Validators](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129776)
   - [Creating & Using Async Validators](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129778)
+  - [Interacting with the Form Programmatically](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129786)
