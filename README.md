@@ -16,3 +16,5 @@ Build [Maximilian Schwarzmüller](https://www.udemy.com/user/maximilian-schwarzm
   You can use NgModel not in two way binding. 
   - `<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">` => provide an object with value: all the input !!
 - [Validating Input with Form Validation Directives](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129726)
+- [Adding Validation Styles](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129734)
+- [Populate input] (https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129752)
