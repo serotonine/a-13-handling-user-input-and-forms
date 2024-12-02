@@ -26,3 +26,4 @@ Build [Maximilian Schwarzmüller](https://www.udemy.com/user/maximilian-schwarzm
   - [Interacting with the Form Programmatically](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129786)
 - [Connecting & Registering Inputs For A Complex Form](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129802)
   - [Nested form groups](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129810)
+  - [Working with Form Arrays](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129816)
