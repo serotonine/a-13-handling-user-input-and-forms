@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+// Custom validator.
+function hasNumber(control: AbstractControl){
+  const hasN = /[0-9]+/.test(control.value);
+  console.log(hasN);
+  return hasN ? null: {valid:true};
+}
 
 @Component({
   selector: 'app-login',
@@ -8,13 +15,14 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
+
 export class LoginComponent {
   form = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
     password: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(6)],
+      validators: [Validators.required, Validators.minLength(6), hasNumber],
     }),
   });
   get isInvalidEmail(){

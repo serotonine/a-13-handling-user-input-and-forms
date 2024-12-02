@@ -21,3 +21,4 @@ Build [Maximilian Schwarzmüller](https://www.udemy.com/user/maximilian-schwarzm
 - [ Reactive Forms] (https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129756)
   The diff with template driven is you don't set up the form with the template.
   - [ReactiveFormsModule](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129762)
+- [Building Custom Validators](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/44129776)
