@@ -7,6 +7,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+function equalValues(cn1: string, cn2: string) {
+  return (control: AbstractControl) => {
+    const control1 = control.get(cn1)?.value;
+    const control2 = control.get(cn2)?.value;
+    if (control1 === control2) {
+      return null;
+    }
+    return { notEqual: true };
+  };
+}
 
 @Component({
   selector: 'app-signup',
@@ -20,14 +30,19 @@ export class SignupComponent {
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
-    passwords: new FormGroup({
-      password: new FormControl('', {
-        validators: [Validators.required, Validators.minLength(6)],
-      }),
-      confirmPassword: new FormControl('', {
-        validators: [Validators.required, Validators.minLength(6)],
-      }),
-    }),
+    passwords: new FormGroup(
+      {
+        password: new FormControl('', {
+          validators: [Validators.required, Validators.minLength(6)],
+        }),
+        confirmPassword: new FormControl('', {
+          validators: [Validators.required, Validators.minLength(6)],
+        }),
+      },
+      {
+        validators: [equalValues('password', 'confirmPassword')],
+      }
+    ),
     firstName: new FormControl('', {
       validators: [Validators.required, Validators.pattern(/[a-z]+/i)],
     }),
@@ -61,6 +76,9 @@ export class SignupComponent {
     }),
   });
   onSubmit() {
+    if (this.signUpForm.invalid) {
+      return;
+    }
     console.log(this.signUpForm);
   }
   onReset() {
