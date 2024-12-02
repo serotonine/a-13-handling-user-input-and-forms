@@ -1,17 +1,20 @@
-<form>
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
   <h2>Login</h2>
 
   <div class="control-row">
     <div class="control no-margin">
       <label for="email">Email</label>
-      <input id="email" type="email" />
+      <input #emailCtrl="ngModel" id="email" type="email" name="email" required email ngModel />
     </div>
 
     <div class="control no-margin">
       <label for="password">Password</label>
-      <input id="password" type="password" />
+      <input #pwdCtrl="ngModel" id="password" type="password" name="password" required minlength="6" (ngModelChange)="onChange(pwdCtrl)" ngModel />
     </div>
 
     <button class="button">Login</button>
   </div>
+  @if(emailCtrl.touched && pwdCtrl.touched && loginForm.form.invalid){
+      <p class="control-error">form not valid at this moment</p>
+  }
 </form>
